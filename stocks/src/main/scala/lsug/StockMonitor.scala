@@ -1,11 +1,12 @@
 
 package lsug
 
-object StockMonitor { 
+object StockMonitor extends App { 
 
-  def main(args*){ 
+  for (ln <- io.Source.stdin.getLines) { 
 
-    
+    val lt = LsugTweetService.unapply(ln)
+    printf("author: %s - date: %s\ntweet: [%s]\n", lt.author, lt.time, lt.body)
   }
 }
 
