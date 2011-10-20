@@ -1,2 +1,4 @@
 .idea
 target
+twitter-search/lib_managed
+*~
