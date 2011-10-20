@@ -2,8 +2,8 @@ package lsug
 
 import twitter4j.conf.{Configuration, ConfigurationBuilder}
 import scala.collection.JavaConversions._
-import twitter4j.{Tweet, Query, Twitter, TwitterFactory}
 import java.text.SimpleDateFormat
+import twitter4j._
 
 class TwitterStreamListener(val query: String) {
   val cb = new ConfigurationBuilder();
@@ -13,12 +13,36 @@ class TwitterStreamListener(val query: String) {
   val df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
   val res = twitter.search(new Query(query))
 
-  res.getTweets.foreach ( (tweet: Tweet) => {
-    val time = df.format(tweet.getCreatedAt)
-    val author = tweet.getFromUser
-    val text = tweet.getText
-    println("%s@%s %s".format(time, author, text))
+  val twitterStream = new TwitterStreamFactory(build).getInstance()
+  twitterStream.addListener(new StatusListener {
+    def onStatus(tweet: Status) {
+      val time = df.format(tweet.getCreatedAt)
+      val author = tweet.getUser.getScreenName
+      val text = tweet.getText
+      println("%s@%s %s".format(time, author, text))
+    }
+
+    def onDeletionNotice(p1: StatusDeletionNotice) {}
+
+    def onScrubGeo(p1: Long, p2: Long) {}
+
+    def onTrackLimitationNotice(p1: Int) {
+      println(p1)
+    }
+
+    def onException(p1: Exception) {
+      p1.printStackTrace()
+    }
   })
+
+  twitterStream.filter(new FilterQuery().track(Array(query)))
+
+//  res.getTweets.foreach ( (tweet: Tweet) => {
+//    val time = df.format(tweet.getCreatedAt)
+//    val author = tweet.getFromUser
+//    val text = tweet.getText
+//    println("%s@%s %s".format(time, author, text))
+//  })
 }
 
 object TwitterStream{

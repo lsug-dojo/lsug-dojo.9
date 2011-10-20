@@ -61,7 +61,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib_managed/scala_2.9.0/compile/twitter4j-core-2.2.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib_managed/scala_2.9.0/compile/twitter4j-core-2.2.5-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -70,7 +70,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib_managed/scala_2.9.0/compile/twitter4j-stream-2.2.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib_managed/scala_2.9.0/compile/twitter4j-stream-2.2.5-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
