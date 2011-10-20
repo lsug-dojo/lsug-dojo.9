@@ -1,8 +1,12 @@
 
 package lsug
 
-case class StockMonitor { 
+object StockMonitor { 
 
+  def main(args*){ 
+
+    
+  }
 }
 
 // consider better time type
