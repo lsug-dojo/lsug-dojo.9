@@ -7,4 +7,7 @@ object TwitterBuild extends Build {
 
     lazy val stocks = Project(id = "stocks",
                            base = file("stocks")) dependsOn(twitterSearch)
+
+  lazy val friends = Project(id = "friends",
+			   base = file("friends")) dependsOn(twitterSearch)
 }
