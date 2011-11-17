@@ -1,4 +1,8 @@
-.idea
-target
-twitter-search/lib_managed
 *~
+target/
+project/boot/
+.idea
+.idea_modules
+target
+lib_managed/
+twitter-search/project/boot/
