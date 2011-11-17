@@ -26,7 +26,8 @@ class TweetStream(val query: String, val userName : String, val password: String
         val time = tweet.getCreatedAt
         val author = tweet.getUser.getScreenName
         val text = tweet.getText
-        listenerFunction(Tweet(time, author, text))
+	val friendsCount = tweet.getUser.getFriendsCount
+        listenerFunction(Tweet(time, author, text, friendsCount))
       }
 
       def onDeletionNotice(p1: StatusDeletionNotice) {}
@@ -45,7 +46,7 @@ class TweetStream(val query: String, val userName : String, val password: String
   }
 }
 
-case class Tweet(time: Date, author: String, text: String)
+case class Tweet(time: Date, author: String, text: String, friendsCount: Int)
 
 object TweetStream {
   def main(args:Array[String]){

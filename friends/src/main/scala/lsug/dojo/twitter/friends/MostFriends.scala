@@ -2,9 +2,19 @@ package lsug.dojo.twitter.friends
 
 class MostFriends { 
 
-  
-  
-  def tweets() = Set()
+  import lsug._
 
-//  val build: Configuration = cb.setDebugEnabled(true).setUser("lsug101").setPassword("lsug010").build()
+  import scala.collection.mutable.ListBuffer
+
+  val tweets = ListBuffer[Tweet]()
+  
+  def startTracking() = { 
+
+   new TweetStream("hi", "username", "password").
+    addListener(SetTweetStream _).start
+  }
+
+  def SetTweetStream(tweet: Tweet)={
+    tweets += tweet
+ }
 }

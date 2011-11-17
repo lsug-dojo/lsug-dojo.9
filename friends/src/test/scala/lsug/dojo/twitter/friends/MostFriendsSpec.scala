@@ -1,20 +1,24 @@
 package lsug.dojo.twitter.friends
 
 import org.scalatest.FlatSpec
+import org.scalatest.BeforeAndAfterAll
 import org.scalatest.matchers.ShouldMatchers
 
-class MostFriendsSpec extends FlatSpec with ShouldMatchers { 
+class MostFriendsSpec extends FlatSpec 
+with ShouldMatchers 
+with BeforeAndAfterAll { 
 
+  val mostFriends = new MostFriends
 
+  override def beforeAll(configMap: Map[String, Any]) { 
 
-  "A MostFriends" should "have tweets" in { 
-    val mostFriends = new MostFriends
+    mostFriends startTracking
 
-    mostFriends.tweets.size should not equal(0)
   }
 
-//  it should "throw NoSuchElementException if an empty stack is popped" in { 
-//    val emptyStack = new Stack[String]
-//    evaluating {  emptyStack.pop() } should produce [NoSuchElementException]
-//  }
+  "A MostFriends" should "have tweets" in { 
+
+    mostFriends.tweets.size should not equal(0)
+
+  }
 }
