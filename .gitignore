@@ -6,4 +6,8 @@ project/boot/
 target
 lib_managed/
 twitter-search/project/boot/
+.project
+.classpath
+.cache
+
 
