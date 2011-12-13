@@ -15,4 +15,7 @@ object TwitterBuild extends Build {
     lazy val emailNotification = Project(id = "email-notification",
                            base = file("email-notification")) dependsOn(twitterSearch)
 
+    lazy val lift = Project(id = "lift",
+          base = file("lift")) dependsOn(twitterSearch)
+
 }
