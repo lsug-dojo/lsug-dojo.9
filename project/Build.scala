@@ -9,10 +9,16 @@ object TwitterBuild extends Build {
     lazy val stocks = Project(id = "stocks",
                            base = file("stocks")) dependsOn(twitterSearch)
 
+    lazy val weather = Project(id = "weather",
+                           base = file("weather")) dependsOn(twitterSearch)
+
     lazy val friends = Project(id = "friends",
 			   base = file("friends")) dependsOn(twitterSearch)
 
     lazy val emailNotification = Project(id = "email-notification",
                            base = file("email-notification")) dependsOn(twitterSearch)
+
+    lazy val lift = Project(id = "lift",
+          base = file("lift")) dependsOn(twitterSearch)
 
 }
