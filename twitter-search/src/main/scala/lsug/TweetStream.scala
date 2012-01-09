@@ -1,12 +1,22 @@
 package lsug
 
-import twitter4j.conf.{Configuration, ConfigurationBuilder}
-import scala.collection.JavaConversions._
 import java.text.SimpleDateFormat
-import twitter4j._
 import java.util.Date
 
-class TweetStream(val query: String, val userName : String, val password: String) {
+import twitter4j.conf.Configuration
+import twitter4j.conf.ConfigurationBuilder
+import twitter4j.FilterQuery
+import twitter4j.Status
+import twitter4j.StatusDeletionNotice
+import twitter4j.StatusListener
+import twitter4j.Twitter
+import twitter4j.TwitterFactory
+import twitter4j.TwitterStreamFactory
+
+class TweetStream(val queries: Array[String], val userName: String, val password: String) {
+
+  def this(query: String, userName: String, password: String) = this(Array(query), userName, password)
+
   val cb = new ConfigurationBuilder();
   val build: Configuration = cb.setDebugEnabled(true).setUser(userName).setPassword(password).build()
   val twitterFactory: TwitterFactory = new TwitterFactory(build)
@@ -15,8 +25,12 @@ class TweetStream(val query: String, val userName : String, val password: String
   val twitterStream = new TwitterStreamFactory(build).getInstance()
 
   def start() {
-    twitterStream.filter(new FilterQuery().track(Array(query)))
-   }
+    twitterStream.filter(new FilterQuery().track(queries))
+  }
+  
+  def query(queries: String*) {
+    twitterStream.filter(new FilterQuery().track(Array(queries:_*)))
+  }
 
   val errorPrinter = (e: Exception) => { e.printStackTrace() }
 
@@ -26,7 +40,7 @@ class TweetStream(val query: String, val userName : String, val password: String
         val time = tweet.getCreatedAt
         val author = tweet.getUser.getScreenName
         val text = tweet.getText
-	val friendsCount = tweet.getUser.getFriendsCount
+        val friendsCount = tweet.getUser.getFriendsCount
         listenerFunction(Tweet(time, author, text, friendsCount))
       }
 
@@ -49,7 +63,7 @@ class TweetStream(val query: String, val userName : String, val password: String
 case class Tweet(time: Date, author: String, text: String, friendsCount: Int)
 
 object TweetStream {
-  def main(args:Array[String]){
-    new TweetStream(args(0), "lsugoct", "Rfsd5819").addListener(println _).start
+  def main(args: Array[String]) {
+    new TweetStream(args, "lsugoct", "Rfsd5819").addListener(println).start
   }
 }
