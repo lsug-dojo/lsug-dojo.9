@@ -27,7 +27,7 @@ class EmailNotifierSpec extends WordSpec
     val emailAddress = "abc@xyz.com"
 
     "should send an email when the search has a new match" in {
-      val testTweetStream = new TweetStream(null, null, null) {
+      val testTweetStream = new TweetStream("", null, null) {
         override def addListener(listenerFunction: (Tweet) => Unit, errorHandler: (Exception) => Unit) = {
           listenerFunction(new Tweet(new Date, "author", "text", 0))
           this
